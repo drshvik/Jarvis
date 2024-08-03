@@ -182,11 +182,9 @@ const App = () => {
     } else if (message.includes("play")) {
       const query = message.replace("play", "").trim();
       searchAndPlayYouTube(query);
-    } else if (
-      message.includes("cricket score") ||
-      message.includes("football score")
-    ) {
-      fetchSportsScore(message);
+    } else if (message.includes("follow lambda on instagram")) {
+      window.open("https://www.instagram.com/lambdaiith/", "_blank");
+      speak("Opening Lambda IITH's Instagram page for you.");
     } else {
       window.open(
         `https://www.google.com/search?q=${message.replace(" ", "+")}`,
@@ -203,24 +201,6 @@ const App = () => {
       `https://www.youtube.com/results?search_query=${query}`,
       "_blank"
     );
-  }
-
-  function fetchSportsScore(query) {
-    speak(`Fetching ${query} scores...`);
-    fetch(`https://api.example.com/sports/scores?query=${query}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.scores) {
-          data.scores.forEach((score) => {
-            speak(`Match: ${score.match}, Score: ${score.score}`);
-          });
-        } else {
-          speak("Sorry, I couldn't find any scores for that match.");
-        }
-      })
-      .catch((error) =>
-        speak("Sorry, I could not fetch the scores at the moment.")
-      );
   }
 
   return (
